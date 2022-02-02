@@ -1,8 +1,12 @@
-import { Layout, Menu } from "antd";
 import React from "react";
-import PolicyHolderForm from "./../policyholderform/PolicyHolderForm";
-import ClaimAccess from "./../claimaccess/ClaimAccessForm";
 import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Layout, Menu } from "antd";
+import PolicyHolderForm from "./../policyholderform/PolicyHolderForm";
+import ClaimAccessForm from "./../claimaccess/ClaimAccessForm";
+import "antd/dist/antd.css";
+import "./dashboard.css";
+
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -10,7 +14,8 @@ export default function Dashboard() {
   return (
     <Layout hasSider>
       <Sider
-        collapsible
+        //collapsible
+        className="ta-Sider"
         style={{
           overflow: "auto",
           height: "100vh",
@@ -20,12 +25,12 @@ export default function Dashboard() {
           bottom: 0,
         }}
       >
-        <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-          <Menu.Item key="1" as={Link} to="/policyform">
+        <div className="logo">DMI</div>
+        <Menu className="ta-menu" defaultSelectedKeys={["1"]} mode="inline">
+          <Menu.Item key="1" as={Link} to="/">
             Cover
           </Menu.Item>
-          <Menu.Item key="2" as={Link} to="/claimaccess">
+          <Menu.Item key="2" as={Link} to={"/claimaccess"}>
             Claim Access
           </Menu.Item>
           <SubMenu key="sub1" title="User">
@@ -52,6 +57,7 @@ export default function Dashboard() {
             zIndex: 1,
             width: "100%",
             color: "white",
+            background: "rgb(249, 251, 253)",
           }}
         >
           Hi
@@ -60,11 +66,18 @@ export default function Dashboard() {
           style={{
             margin: "80px 16px 20px 16px",
             overflow: "initial",
-            backgroundColor: "white",
+            backgroundColor: "rgb(249,251,253)",
           }}
         >
           <div className="site-layout-background" style={{ padding: 24 }}>
-            <PolicyHolderForm />
+            <Router>
+              <Switch>
+                <Route exact path="/" component={PolicyHolderForm}></Route>
+                <Route path="/claimaccess" component={ClaimAccessForm}>
+                  <ClaimAccessForm />
+                </Route>
+              </Switch>
+            </Router>
           </div>
         </Content>
       </Layout>

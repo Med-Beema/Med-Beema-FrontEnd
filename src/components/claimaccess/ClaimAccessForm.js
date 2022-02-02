@@ -74,7 +74,7 @@ export default function ClaimAccessForm() {
         encType="multipart/form-data"
       >
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Full Name</Form.Label>
           <Form.Control
             required
             value={values.name}
