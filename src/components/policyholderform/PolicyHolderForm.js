@@ -220,9 +220,7 @@ export default function PolicyHolderForm() {
             feedback="You must agree before submitting."
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <Button variant="primary">Submit</Button>
       </Form>
     </Container>
   );
