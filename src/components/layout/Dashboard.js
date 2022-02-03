@@ -69,7 +69,7 @@ export default function Dashboard() {
 
       <Layout
         className="site-layout"
-        style={{ marginLeft: 200, backgroundColor: "white" }}
+        style={{ marginLeft: 200, backgroundColor: "#f8f9fa" }}
       >
         <Header
           className="site-layout-background"
@@ -80,7 +80,7 @@ export default function Dashboard() {
             width: "100%",
             color: "white",
             background: "rgb(249, 251, 253)",
-            boxShadow: "initial",
+            boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)",
           }}
         >
           <Row>
@@ -125,8 +125,10 @@ export default function Dashboard() {
         <Content
           style={{
             margin: "80px 16px 20px 16px",
+            height: "max",
             overflow: "initial",
-            backgroundColor: "rgb(249,251,253)",
+            backgroundColor: "#f8f9fa",
+            position: "relative",
           }}
         >
           <div className="site-layout-background" style={{ padding: 24 }}>
