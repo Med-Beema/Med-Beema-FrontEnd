@@ -138,7 +138,9 @@ export default function PolicyHolderForm() {
         </Form.Group>
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Photo</Form.Label>
-          {values.photo && <img src={values.photo} width={200} height={200} />}
+          {values.photo && (
+            <img src={values.photo} alt="" width={200} height={200} />
+          )}
           <Form.Control
             required
             type="file"
@@ -190,7 +192,12 @@ export default function PolicyHolderForm() {
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Identification Photo</Form.Label>
           {values.identificationPhoto && (
-            <img src={values.identificationPhoto} width={200} height={200} />
+            <img
+              src={values.identificationPhoto}
+              alt=""
+              width={200}
+              height={200}
+            />
           )}
           <Form.Control
             required
@@ -203,7 +210,7 @@ export default function PolicyHolderForm() {
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Signature</Form.Label>
           {values.signature && (
-            <img src={values.signature} width={200} height={200} />
+            <img src={values.signature} alt="" width={200} height={200} />
           )}
           <Form.Control
             required

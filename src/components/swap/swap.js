@@ -1,26 +1,37 @@
 import { Card, Col, Row, Select } from "antd";
-import React, { useState } from "react";
-import { Button, Form, Container } from "react-bootstrap";
-const { Option } = Select;
+import React, { useEffect, useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import DollarText from "./DollarText";
+// const { Option } = Select;
 
-function Deposit() {
-  const [amount, setAmount] = useState(0);
-
-  const exchangeRate = 0.001;
+function Swap(props) {
+  const exchangeRateToken = 0.01;
+  const exchangeRateDollar = 2000;
+  //   const isWalletConnected = props.isWalletConnected;
+  const [tokenAmount, setTokenAmount] = useState(0);
+  const [ethAmount, setEthAmount] = useState(tokenAmount * exchangeRateToken);
 
   const tokenName = "DMI";
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(amount);
+    console.log(tokenAmount);
   }
 
-  const selectAfter = (
-    <Select defaultValue="ETH" className="select-after">
-      <Option value="ETH">ETH</Option>
-      <Option value={tokenName}>DMI</Option>
-    </Select>
-  );
+  //   const selectAfter = (
+  //     <Select defaultValue="ETH" className="select-after">
+  //       <Option value="ETH">ETH</Option>
+  //       <Option value={tokenName}>DMI</Option>
+  //     </Select>
+  //   );
+
+  function handleTokenChange(value) {
+    setTokenAmount(value);
+  }
+
+  useEffect(() => {
+    setEthAmount(tokenAmount * exchangeRateToken);
+  }, [tokenAmount]);
 
   return (
     <div>
@@ -52,15 +63,15 @@ function Deposit() {
                       alignItems: "center",
                     }}
                   >
-                    <Form.Label>You Pay:</Form.Label>
-                    <span>Max</span>
+                    <Form.Label>You Receive:</Form.Label>
+                    {/* <span>Max</span> */}
                   </div>
                   <Form.Control
                     size="lg"
                     type="text"
                     placeholder="0"
                     // addonAfter={selectAfter} only in  ant form
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => handleTokenChange(e.target.value)}
                     style={{
                       textAlign: "right",
                       // outline: "none",
@@ -74,9 +85,11 @@ function Deposit() {
                       // alignItems: "center",
                     }}
                   >
-                    <p>
-                      $<span>0.00</span>
-                    </p>
+                    <DollarText
+                      value={
+                        tokenAmount * exchangeRateToken * exchangeRateDollar
+                      }
+                    />
                   </div>
                 </Form.Group>
               </div>
@@ -120,7 +133,7 @@ function Deposit() {
               </svg>
             </Col>
 
-            {/* you receive */}
+            {/* You Pay */}
             <Col span={9}>
               <div
                 // :active
@@ -138,8 +151,8 @@ function Deposit() {
                       alignItems: "center",
                     }}
                   >
-                    <Form.Label>Amount</Form.Label>
-                    <span>Max</span>
+                    <Form.Label>You Pay:</Form.Label>
+                    {/* <span>Max</span> */}
                   </div>
                   <Form.Control
                     disabled
@@ -147,12 +160,12 @@ function Deposit() {
                     type="text"
                     placeholder="0"
                     // addonAfter={selectAfter} only in  ant form
-                    onChange={(e) => setAmount(e.target.value)}
                     style={{
                       textAlign: "right",
                       // outline: "none",
                       border: "none",
                     }}
+                    value={ethAmount}
                   />
                   <div
                     style={{
@@ -161,9 +174,7 @@ function Deposit() {
                       // alignItems: "center",
                     }}
                   >
-                    <p>
-                      $<span>0.00</span>
-                    </p>
+                    <DollarText value={ethAmount * exchangeRateDollar} />
                   </div>
                 </Form.Group>
               </div>
@@ -177,7 +188,7 @@ function Deposit() {
               Rate:
             </Col>
             <Col span={12} style={{ textAlign: "right" }}>
-              1 NXM ≈ 0.0335 ETH
+              1 {tokenName} ≈ {exchangeRateToken} ETH
             </Col>
           </Row>
           <Row>
@@ -185,10 +196,10 @@ function Deposit() {
               Inverse rate:
             </Col>
             <Col span={12} style={{ textAlign: "right" }}>
-              1 ETH ≈ 29.7766 NXM
+              1 ETH ≈ {1 / exchangeRateToken} {tokenName}
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col span={12} style={{ textAlign: "left" }}>
               Slippage tolerance:
             </Col>
@@ -203,7 +214,7 @@ function Deposit() {
             <Col span={12} style={{ textAlign: "right" }}>
               0.0000 NXM
             </Col>
-          </Row>
+          </Row> */}
           <div
             style={{
               display: "flex",
@@ -212,11 +223,21 @@ function Deposit() {
             }}
           >
             <Button
-              variant="outline-success"
-              type="submit"
+              variant="outline-primary"
               style={{ fontSize: "20px", borderRadius: "20px" }}
             >
               Connect Wallet
+            </Button>
+            <Button
+              variant="outline-success"
+              className="pl-20 pr-20 ml-20"
+              type="submit"
+              style={{
+                fontSize: "20px",
+                borderRadius: "20px",
+              }}
+            >
+              Buy
             </Button>
           </div>
         </div>
@@ -225,4 +246,4 @@ function Deposit() {
     </div>
   );
 }
-export default Deposit;
+export default Swap;
