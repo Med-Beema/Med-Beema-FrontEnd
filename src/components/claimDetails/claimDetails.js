@@ -10,6 +10,7 @@ function onFinish() {
 export default function ClaimDetails() {
   return (
     <div>
+      <h3>Claim Details</h3>
       <div
         style={{
           display: "flex",
@@ -17,13 +18,16 @@ export default function ClaimDetails() {
           justifyContent: "space-between",
         }}
       >
-        <h3>Claim Details</h3>
+        <h4>
+          No. <span>#21346513</span>
+        </h4>
         <Countdown
           title="Voting Ends In"
           value={deadline}
           onFinish={onFinish}
+          valueStyle={{ fontSize: "30px" }}
         />
-        <div></div>
+        {/* <div></div> */}
       </div>
       <Descriptions
         bordered
