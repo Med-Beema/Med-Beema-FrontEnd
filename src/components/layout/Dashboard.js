@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import { Layout, Menu, Button, Row, Col, Modal } from "antd";
+import Buycover from "../buycover/Buycover";
 import PolicyHolderForm from "./../policyholderform/PolicyHolderForm";
 import ClaimAccessForm from "./../claimaccess/ClaimAccessForm";
 import Deposit from "./../deposit/deposit";
+import Claims from "../claims/Claims";
 import "antd/dist/antd.css";
 import "./dashboard.css";
 
@@ -45,10 +47,18 @@ export default function Dashboard() {
               to="/"
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
-              Cover
+              Buy Cover
             </Link>
           </Menu.Item>
           <Menu.Item key="2">
+            <Link
+              to="/profileInfo"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              Profile Info
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="3">
             <Link
               to="/claimaccess"
               style={{ color: "inherit", textDecoration: "inherit" }}
@@ -56,12 +66,20 @@ export default function Dashboard() {
               Claim Access
             </Link>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="4">
             <Link
               to="/deposit"
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
               Deposit
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="5">
+            <Link
+              to="/claims"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              Claims
             </Link>
           </Menu.Item>
         </Menu>
@@ -76,7 +94,7 @@ export default function Dashboard() {
           style={{
             padding: 0,
             position: "fixed",
-            zIndex: 1,
+            zIndex: 999,
             width: "100%",
             color: "white",
             background: "rgb(249, 251, 253)",
@@ -125,17 +143,19 @@ export default function Dashboard() {
         <Content
           style={{
             margin: "80px 16px 20px 16px",
-            height: "max",
-            overflow: "initial",
+            height: "100vh",
+            overflow: "auto",
             backgroundColor: "#f8f9fa",
             position: "relative",
           }}
         >
           <div className="site-layout-background" style={{ padding: 24 }}>
             <Routes>
-              <Route path="/" element={<PolicyHolderForm />} />
+              <Route path="/" element={<Buycover />} />
+              <Route path="/profileInfo" element={<PolicyHolderForm />} />
               <Route path="/claimaccess" element={<ClaimAccessForm />} />
               <Route path="/deposit" element={<Deposit />} />
+              <Route path="/claims" element={<Claims />} />
             </Routes>
           </div>
         </Content>
