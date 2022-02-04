@@ -148,7 +148,9 @@ export default function ClaimAccessForm() {
             feedback="You must agree before submitting."
           />
         </Form.Group>
-        <Button variant="primary">Submit</Button>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
       </Form>
     </Container>
   );
