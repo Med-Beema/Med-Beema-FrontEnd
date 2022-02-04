@@ -10,14 +10,15 @@ import Claims from "../claims/Claims";
 import Swap from "./../swap/swap";
 import "antd/dist/antd.css";
 import "./dashboard.css";
+import ClaimDetails from "../claimDetails/claimDetails";
 
 const { Option } = Select;
 const { Header, Content, Sider } = Layout;
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 export default function Dashboard() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isWalletConnected, setIsWalletConnected] = useState(true);
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
 
   const tokenName = "DMI";
   const tokenNum = 0;
@@ -108,6 +109,17 @@ export default function Dashboard() {
               }}
             >
               Swap
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="7">
+            <Link
+              to="/claimDetails"
+              style={{
+                color: "inherit",
+                textDecoration: "inherit",
+              }}
+            >
+              Claim Details
             </Link>
           </Menu.Item>
         </Menu>
@@ -279,6 +291,10 @@ export default function Dashboard() {
               <Route
                 path="/swap"
                 element={<Swap isWalletConnected={isWalletConnected} />}
+              />
+              <Route
+                path="/claimDetails"
+                element={<ClaimDetails isWalletConnected={isWalletConnected} />}
               />
             </Routes>
           </div>
