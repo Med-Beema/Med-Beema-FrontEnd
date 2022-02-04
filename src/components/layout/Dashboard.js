@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import { Layout, Menu, Button, Row, Col, Modal, Select } from "antd";
+import { Layout, Menu, Row, Col, Modal, Select } from "antd";
+import { Button } from "react-bootstrap";
 import Buycover from "../buycover/Buycover";
 import PolicyHolderForm from "./../policyholderform/PolicyHolderForm";
 import ClaimAccessForm from "./../claimaccess/ClaimAccessForm";
