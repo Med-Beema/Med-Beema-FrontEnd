@@ -33,7 +33,7 @@ export default function ClaimAccessForm() {
       let formData = new FormData();
       formData.set("image", e.target.files[0]);
       axios
-        .post("http://localhost:3000/api/uploadImage", formData)
+        .post("http://localhost:5000/api/uploadImage", formData)
         .then((res) => {
           console.log(res);
           if (res.status === 200) {
@@ -54,7 +54,7 @@ export default function ClaimAccessForm() {
     } else {
       console.log(values);
       axios
-        .post("http://localhost:3000/api/data", values)
+        .post("http://localhost:5000/api/data", values)
         .then((response) => {
           console.log(response);
         })
