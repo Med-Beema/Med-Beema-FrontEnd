@@ -65,7 +65,7 @@ export default function Claims() {
       key: "6",
       title: "ACTION",
       dataIndex: "",
-      render: () => <a>View</a>,
+      render: () => <a href="#">View</a>,
     },
   ];
   const data = [

@@ -134,6 +134,7 @@ export default function ClaimAccessForm() {
                 type="file"
                 name="documents"
                 onChange={handleFileChange}
+                multiple
                 accept="pdf/*"
               />
             </Form.Group>
