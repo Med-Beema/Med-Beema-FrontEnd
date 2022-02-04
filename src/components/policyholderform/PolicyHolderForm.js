@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./policyholderform.css";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 export default function PolicyHolderForm() {
   const [validated, setValidated] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     name: "",
     fatherName: "",
@@ -30,6 +30,7 @@ export default function PolicyHolderForm() {
   }
 
   function handleImageChange(e) {
+    setLoading(true);
     if (e.target.files.length) {
       let formData = new FormData();
       formData.set("image", e.target.files[0]);
@@ -44,6 +45,7 @@ export default function PolicyHolderForm() {
             }));
           }
         });
+      setLoading(false);
     }
   }
 
@@ -68,158 +70,202 @@ export default function PolicyHolderForm() {
   return (
     <Container>
       <Form
-        className="row g-3"
         noValidate
         validated={validated}
         onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            required
-            value={values.name}
-            name="name"
-            type="text"
-            onChange={handleChange}
-            hasfeedback="true"
-            rules={[{ required: true, message: "Please enter valid name" }]}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Fathers Name</Form.Label>
-          <Form.Control
-            required
-            value={values.fatherName}
-            name="fatherName"
-            type="text"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>DOB</Form.Label>
-          <Form.Control
-            required
-            value={values.dob}
-            name="dob"
-            type="date"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Address</Form.Label>
-          <Form.Control
-            required
-            value={values.permanentAddress}
-            name="permanentAddress"
-            type="text"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Occupation</Form.Label>
-          <Form.Control
-            required
-            value={values.occupation}
-            name="occupation"
-            type="text"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Contact Number</Form.Label>
-          <Form.Control
-            required
-            value={values.contactNum}
-            name="contactNum"
-            type="tel"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Photo</Form.Label>
-          {values.photo && (
-            <img src={values.photo} alt="" width={200} height={200} />
-          )}
-          <Form.Control
-            required
-            type="file"
-            name="photo"
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Identification</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            value={values.identificationNum}
-            name="identificationNum"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>ID Type</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            value={values.idType}
-            name="idType"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Issued Date</Form.Label>
-          <Form.Control
-            required
-            type="date"
-            value={values.issuedDate}
-            name="issuedDate"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Issued Place</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            value={values.issuePlace}
-            name="issuePlace"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Identification Photo</Form.Label>
-          {values.identificationPhoto && (
-            <img
-              src={values.identificationPhoto}
-              alt=""
-              width={200}
-              height={200}
-            />
-          )}
-          <Form.Control
-            required
-            type="file"
-            name="identificationPhoto"
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-        </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Signature</Form.Label>
-          {values.signature && (
-            <img src={values.signature} alt="" width={200} height={200} />
-          )}
-          <Form.Control
-            required
-            type="file"
-            name="signature"
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-        </Form.Group>
+        <Row className="align-items-center">
+          <Col sm={3}>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                required
+                value={values.name}
+                name="name"
+                type="text"
+                onChange={handleChange}
+                hasfeedback="true"
+                rules={[{ required: true, message: "Please enter valid name" }]}
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={3}>
+            <Form.Group className="mb-3">
+              <Form.Label>Fathers Name</Form.Label>
+              <Form.Control
+                required
+                value={values.fatherName}
+                name="fatherName"
+                type="text"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={3}>
+            <Form.Group className="mb-3">
+              <Form.Label>DOB</Form.Label>
+              <Form.Control
+                required
+                value={values.dob}
+                name="dob"
+                type="date"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col sm>
+            <Form.Group className="mb-3">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                required
+                value={values.permanentAddress}
+                name="permanentAddress"
+                type="text"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={3}>
+            <Form.Group className="mb-3">
+              <Form.Label>Occupation</Form.Label>
+              <Form.Control
+                required
+                value={values.occupation}
+                name="occupation"
+                type="text"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={3}>
+            <Form.Group className="mb-3">
+              <Form.Label>Contact Number</Form.Label>
+              <Form.Control
+                required
+                value={values.contactNum}
+                name="contactNum"
+                type="tel"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={3}>
+            <Form.Group className="mb-3">
+              <Form.Label>ID Type</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                value={values.idType}
+                name="idType"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={3}>
+            <Form.Group className="mb-3">
+              <Form.Label>Identification</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                value={values.identificationNum}
+                name="identificationNum"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={3}>
+            <Form.Group className="mb-3">
+              <Form.Label>Issued Date</Form.Label>
+              <Form.Control
+                required
+                type="date"
+                value={values.issuedDate}
+                name="issuedDate"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={3}>
+            <Form.Group className="mb-3">
+              <Form.Label>Issued Place</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                value={values.issuePlace}
+                name="issuePlace"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={6}>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Photo</Form.Label>
+              <Form.Control
+                required
+                type="file"
+                name="photo"
+                onChange={handleImageChange}
+                accept="image/*"
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={3}>
+            {values.photo && (
+              <img src={values.photo} width={200} height={200} alt="" />
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={6}>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Identification Photo</Form.Label>
+              <Form.Control
+                required
+                type="file"
+                name="identificationPhoto"
+                onChange={handleImageChange}
+                accept="image/*"
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={3}>
+            {values.identificationPhoto && (
+              <img
+                src={values.identificationPhoto}
+                width={200}
+                height={200}
+                alt=""
+              />
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={6}>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Signature</Form.Label>
+              <Form.Control
+                required
+                type="file"
+                name="signature"
+                onChange={handleImageChange}
+                accept="image/*"
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={3}>
+            {values.signature && (
+              <img src={values.signature} width={200} height={200} alt="" />
+            )}
+          </Col>
+        </Row>
+
         <Form.Group className="mb-3">
           <Form.Check
             required
@@ -227,7 +273,9 @@ export default function PolicyHolderForm() {
             feedback="You must agree before submitting."
           />
         </Form.Group>
-        <Button variant="primary">Submit</Button>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
       </Form>
     </Container>
   );

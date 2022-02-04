@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import { Layout, Menu, Row, Col, Select, Input, Modal } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import { Button } from "react-bootstrap";
+import { Layout, Menu, Button, Row, Col, Modal, Select } from "antd";
+import Buycover from "../buycover/Buycover";
 import PolicyHolderForm from "./../policyholderform/PolicyHolderForm";
 import ClaimAccessForm from "./../claimaccess/ClaimAccessForm";
 import Deposit from "./../deposit/deposit";
+import Claims from "../claims/Claims";
 import Swap from "./../swap/swap";
 import "antd/dist/antd.css";
 import "./dashboard.css";
@@ -56,10 +56,18 @@ export default function Dashboard() {
                 textDecoration: "inherit",
               }}
             >
-              Cover
+              Buy Cover
             </Link>
           </Menu.Item>
           <Menu.Item key="2">
+            <Link
+              to="/profileInfo"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              Profile Info
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="3">
             <Link
               to="/claimaccess"
               style={{
@@ -70,7 +78,7 @@ export default function Dashboard() {
               Claim Access
             </Link>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="4">
             <Link
               to="/deposit"
               style={{
@@ -81,7 +89,16 @@ export default function Dashboard() {
               Deposit
             </Link>
           </Menu.Item>
-          <Menu.Item key="4">
+
+          <Menu.Item key="5">
+            <Link
+              to="/claims"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              Claims
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="6">
             <Link
               to="/swap"
               style={{
@@ -104,7 +121,7 @@ export default function Dashboard() {
           style={{
             padding: 0,
             position: "fixed",
-            zIndex: 1,
+            zIndex: 999,
             width: "100%",
             // color: "white",
             background: "rgb(249, 251, 253)",
@@ -226,8 +243,8 @@ export default function Dashboard() {
         <Content
           style={{
             margin: "80px 16px 20px 16px",
-            height: "max",
-            overflow: "initial",
+            height: "100vh",
+            overflow: "auto",
             backgroundColor: "#f8f9fa",
             position: "relative",
           }}
@@ -236,6 +253,10 @@ export default function Dashboard() {
             <Routes>
               <Route
                 path="/"
+                element={<Buycover isWalletConnected={isWalletConnected} />}
+              />
+              <Route
+                path="/profileInfo"
                 element={
                   <PolicyHolderForm isWalletConnected={isWalletConnected} />
                 }
@@ -249,6 +270,10 @@ export default function Dashboard() {
               <Route
                 path="/deposit"
                 element={<Deposit isWalletConnected={isWalletConnected} />}
+              />
+              <Route
+                path="/claims"
+                element={<Claims isWalletConnected={isWalletConnected} />}
               />
               <Route
                 path="/swap"
