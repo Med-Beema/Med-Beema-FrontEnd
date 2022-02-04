@@ -25,13 +25,14 @@ export default function Buycover() {
             <Card className="card-Wrapper" bordered={false}>
               <div className="contentWrapper">
                 <div className="imageSection">
-                  <div className="image">
+                  <div className="Image">
                     <img
-                      src="https://academy.moralis.io/wp-content/uploads/2021/06/cover_logo.png"
+                      //src="https://academy.moralis.io/wp-content/uploads/2021/06/cover_logo.png"
+                      src="https://app.nexusmutual.io/logos/ribbon.svg"
                       style={{ height: 50, width: 50 }}
                     ></img>
                   </div>
-                  <div className="covername">medical</div>
+                  <div className="coverName">medical</div>
                 </div>
                 <div className="coverInfo">
                   <label className="label">Period</label>

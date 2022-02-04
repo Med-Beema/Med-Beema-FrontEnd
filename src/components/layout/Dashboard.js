@@ -8,9 +8,10 @@ import ClaimAccessForm from "./../claimaccess/ClaimAccessForm";
 import Deposit from "./../deposit/deposit";
 import Claims from "../claims/Claims";
 import Swap from "./../swap/swap";
+import ClaimDetails from "../claimDetails/claimDetails";
 import "antd/dist/antd.css";
 import "./dashboard.css";
-import ClaimDetails from "../claimDetails/claimDetails";
+import ClaimResult from "../claimResult/ClaimResult";
 
 const { Option } = Select;
 const { Header, Content, Sider } = Layout;
@@ -120,6 +121,18 @@ export default function Dashboard() {
               }}
             >
               Claim Details
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item key="8">
+            <Link
+              to="/claimResult"
+              style={{
+                color: "inherit",
+                textDecoration: "inherit",
+              }}
+            >
+              Claim Result
             </Link>
           </Menu.Item>
         </Menu>
@@ -295,6 +308,10 @@ export default function Dashboard() {
               <Route
                 path="/claimDetails"
                 element={<ClaimDetails isWalletConnected={isWalletConnected} />}
+              />
+              <Route
+                path="/claimResult"
+                element={<ClaimResult isWalletConnected={isWalletConnected} />}
               />
             </Routes>
           </div>
