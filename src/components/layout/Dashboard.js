@@ -4,6 +4,7 @@ import { Layout, Menu, Button, Row, Col, Modal } from "antd";
 import PolicyHolderForm from "./../policyholderform/PolicyHolderForm";
 import ClaimAccessForm from "./../claimaccess/ClaimAccessForm";
 import Deposit from "./../deposit/deposit";
+import Claims from "../claims/Claims";
 import "antd/dist/antd.css";
 import "./dashboard.css";
 
@@ -64,6 +65,14 @@ export default function Dashboard() {
               Deposit
             </Link>
           </Menu.Item>
+          <Menu.Item key="4">
+            <Link
+              to="/claims"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              Claims
+            </Link>
+          </Menu.Item>
         </Menu>
       </Sider>
 
@@ -76,7 +85,7 @@ export default function Dashboard() {
           style={{
             padding: 0,
             position: "fixed",
-            zIndex: 1,
+            zIndex: 999,
             width: "100%",
             color: "white",
             background: "rgb(249, 251, 253)",
@@ -125,8 +134,8 @@ export default function Dashboard() {
         <Content
           style={{
             margin: "80px 16px 20px 16px",
-            height: "max",
-            overflow: "initial",
+            height: "100vh",
+            overflow: "auto",
             backgroundColor: "#f8f9fa",
             position: "relative",
           }}
@@ -136,6 +145,7 @@ export default function Dashboard() {
               <Route path="/" element={<PolicyHolderForm />} />
               <Route path="/claimaccess" element={<ClaimAccessForm />} />
               <Route path="/deposit" element={<Deposit />} />
+              <Route path="/claims" element={<Claims />} />
             </Routes>
           </div>
         </Content>

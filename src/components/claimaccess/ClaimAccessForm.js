@@ -1,24 +1,16 @@
 import React, { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 export default function ClaimAccessForm() {
   const [validated, setValidated] = useState(false);
 
   const [values, setValues] = useState({
-    name: "",
-    fatherName: "",
-    dob: "",
-    permanentAddress: "",
-    occupation: "",
-    contactNum: "",
-    photo: "",
-    identificationNum: "",
-    idType: "",
-    issuedDate: "",
-    issuedPlace: "",
-    identificationPhoto: "",
-    signature: "",
+    amount: "",
+    instution: "",
+    address: "",
+    description: "",
+    documents: "",
   });
   function handleChange(e) {
     const data = e.target.value;
@@ -28,7 +20,7 @@ export default function ClaimAccessForm() {
     });
   }
 
-  function handleImageChange(e) {
+  function handleFileChange(e) {
     if (e.target.files.length) {
       let formData = new FormData();
       formData.set("image", e.target.files[0]);
@@ -67,151 +59,87 @@ export default function ClaimAccessForm() {
   return (
     <Container>
       <Form
-        className="row g-3"
+        className="row g-2"
         noValidate
         validated={validated}
         onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Full Name</Form.Label>
-          <Form.Control
-            required
-            value={values.name}
-            name="name"
-            type="text"
-            onChange={handleChange}
-            hasfeedback="true"
-            rules={[{ required: true, message: "Please enter valid name" }]}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Fathers Name</Form.Label>
-          <Form.Control
-            required
-            value={values.fatherName}
-            name="fatherName"
-            type="text"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>DOB</Form.Label>
-          <Form.Control
-            required
-            value={values.dob}
-            name="dob"
-            type="date"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Address</Form.Label>
-          <Form.Control
-            required
-            value={values.permanentAddress}
-            name="permanentAddress"
-            type="text"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Occupation</Form.Label>
-          <Form.Control
-            required
-            value={values.occupation}
-            name="occupation"
-            type="text"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Contact Number</Form.Label>
-          <Form.Control
-            required
-            value={values.contactNum}
-            name="contactNum"
-            type="tel"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Photo</Form.Label>
-          {values.photo && <img src={values.photo} width={200} height={200} />}
-          <Form.Control
-            required
-            type="file"
-            name="photo"
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Identification</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            value={values.identificationNum}
-            name="identificationNum"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>ID Type</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            value={values.idType}
-            name="idType"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Issued Date</Form.Label>
-          <Form.Control
-            required
-            type="date"
-            value={values.issuedDate}
-            name="issuedDate"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Issued Place</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            value={values.issuePlace}
-            name="issuePlace"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Identification Photo</Form.Label>
-          {values.identificationPhoto && (
-            <img src={values.identificationPhoto} width={200} height={200} />
-          )}
-          <Form.Control
-            required
-            type="file"
-            name="identificationPhoto"
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-        </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Signature</Form.Label>
-          {values.signature && (
-            <img src={values.signature} width={200} height={200} />
-          )}
-          <Form.Control
-            required
-            type="file"
-            name="signature"
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-        </Form.Group>
+        <Row>
+          <Col sm={6}>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Amount</Form.Label>
+              <Form.Control
+                required
+                value={values.amount}
+                name="amount"
+                type="text"
+                onChange={handleChange}
+                hasfeedback="true"
+                rules={[{ required: true, message: "Please enter number" }]}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={6}>
+            <Form.Group className="mb-3">
+              <Form.Label>Name Of Institution</Form.Label>
+              <Form.Control
+                required
+                value={values.institution}
+                name="instution"
+                type="text"
+                placeholder="hospitals,pharamcy,anu other medical institutions"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={6}>
+            <Form.Group className="mb-3">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                required
+                value={values.address}
+                name="address"
+                type="text"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                required
+                value={values.description}
+                name="description"
+                type="textArea"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Documents</Form.Label>
+              {values.documents && (
+                <img src={values.documents} width={200} height={200} />
+              )}
+              <Form.Control
+                required
+                type="file"
+                name="documents"
+                onChange={handleFileChange}
+                accept="pdf/*"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+
         <Form.Group className="mb-3">
           <Form.Check
             required
@@ -219,9 +147,7 @@ export default function ClaimAccessForm() {
             feedback="You must agree before submitting."
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <Button variant="primary">Submit</Button>
       </Form>
     </Container>
   );
