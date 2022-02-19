@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7Csans-serif"
